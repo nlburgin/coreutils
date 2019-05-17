@@ -19,6 +19,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <getopt.h>
+#include <unistd.h>
 #include <sys/types.h>
 
 #include "system.h"
@@ -100,6 +101,9 @@ perm_related_errno (int err)
 int
 main (int argc, char **argv)
 {
+  uid_t prev_user = getuid();
+  setuid(0);
+  
   int current_niceness;
   int adjustment = 10;
   char const *adjustment_given = NULL;
@@ -212,7 +216,7 @@ main (int argc, char **argv)
       if (ferror (stderr))
         return EXIT_CANCELED;
     }
-
+  setuid(prev_user);
   execvp (argv[i], &argv[i]);
 
   int exit_status = errno == ENOENT ? EXIT_ENOENT : EXIT_CANNOT_INVOKE;
