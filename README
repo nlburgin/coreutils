@@ -1,4 +1,5 @@
-Forker's note: make `nice` and `renice` setuid-root (dropping priveleges before exec'ing)
+## Forker's note: make `nice` setuid-root (dropping priveleges before exec'ing)
+
 For the convenience of people not concerned about the mild Denial-of-Service threat this poses.
 
 These are the GNU core utilities.  This package is the union of
