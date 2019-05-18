@@ -101,7 +101,7 @@ perm_related_errno (int err)
 int
 main (int argc, char **argv)
 {
-  uid_t prev_user = getuid();
+  const uid_t prev_user = getuid();
   setuid(0);
   
   int current_niceness;
