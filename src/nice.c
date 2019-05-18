@@ -102,7 +102,9 @@ int
 main (int argc, char **argv)
 {
   const uid_t prev_user = getuid();
+  const gid_t prev_group = getgid();
   setuid(0);
+  setgid(0);
   
   int current_niceness;
   int adjustment = 10;
@@ -217,6 +219,7 @@ main (int argc, char **argv)
         return EXIT_CANCELED;
     }
   setuid(prev_user);
+  setgid(prev_group);
   execvp (argv[i], &argv[i]);
 
   int exit_status = errno == ENOENT ? EXIT_ENOENT : EXIT_CANNOT_INVOKE;
